@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K1体育 — 知识库式信息索引页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #fafafa;
+            color: #1e1e1e;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            padding: 2.4rem 1rem;
+        }
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+        /* 头部 / hero 区 — 克制留白 */
+        .hero {
+            margin-bottom: 3.5rem;
+            border-bottom: 1px solid #e6e6e6;
+            padding-bottom: 2rem;
+        }
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 550;
+            letter-spacing: -0.015em;
+            color: #111;
+            margin-bottom: 0.4rem;
+        }
+        .hero p {
+            color: #555;
+            font-size: 0.95rem;
+            max-width: 580px;
+        }
+        /* 通用标题层级 */
+        h2 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            margin: 2.2rem 0 0.8rem 0;
+            color: #1a1a1a;
+            letter-spacing: -0.01em;
+            border-left: 3px solid #2b2b2b;
+            padding-left: 0.65rem;
+        }
+        h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin: 1.6rem 0 0.4rem 0;
+            color: #2e2e2e;
+        }
+        /* 目录感布局：卡片网格 */
+        .index-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 0.8rem 0 1.8rem 0;
+        }
+        .index-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 1.2rem 1rem 1rem 1rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03), 0 0 0 1px rgba(0,0,0,0.02);
+            transition: box-shadow 0.2s;
+        }
+        .index-card:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.06);
+        }
+        .index-card .label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: #888;
+            margin-bottom: 0.25rem;
+            font-weight: 500;
+        }
+        .index-card .title {
+            font-weight: 500;
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            color: #111;
+        }
+        .index-card .desc {
+            font-size: 0.88rem;
+            color: #4a4a4a;
+            line-height: 1.5;
+        }
+        /* 说明区 & 提示区 */
+        .info-block {
+            background: #f5f5f5;
+            border-radius: 14px;
+            padding: 1.4rem 1.5rem;
+            margin: 1.6rem 0;
+            border-left: 3px solid #888;
+        }
+        .info-block.info {
+            border-left-color: #3b6ea5;
+            background: #f0f4fa;
+        }
+        .info-block.tip {
+            border-left-color: #a0753b;
+            background: #faf6f0;
+        }
+        .info-block p {
+            font-size: 0.95rem;
+            color: #2c2c2c;
+            margin-bottom: 0.4rem;
+        }
+        .info-block p:last-child {
+            margin-bottom: 0;
+        }
+        /* 相关信息区 — 紧凑列表 */
+        .related-list {
+            list-style: none;
+            margin: 0.6rem 0 1.8rem 0;
+        }
+        .related-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px solid #ececec;
+            font-size: 0.93rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.3rem;
+        }
+        .related-list li:last-child {
+            border-bottom: none;
+        }
+        .related-list .tag {
+            font-weight: 450;
+            color: #1a1a1a;
+            min-width: 5em;
+        }
+        .related-list .value {
+            color: #3a3a3a;
+        }
+        /* 内联链接 */
+        a {
+            color: #1f5090;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.1s;
+        }
+        a:hover {
+            border-bottom-color: #1f5090;
+        }
+        /* 句子中的链接样式（不加下划线，hover时出现） */
+        .inline-link {
+            border-bottom: 1px dotted #b0c4de;
+        }
+        .inline-link:hover {
+            border-bottom-style: solid;
+        }
+        /* 响应式 */
+        @media (max-width: 480px) {
+            body {
+                padding: 1.5rem 0.8rem;
+            }
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            .index-grid {
+                grid-template-columns: 1fr;
+                gap: 0.9rem;
+            }
+            .info-block {
+                padding: 1rem 1.2rem;
+            }
+            h2 {
+                font-size: 1.15rem;
+            }
+        }
+        /* 底部薄分隔 */
+        .footnote {
+            margin-top: 3.2rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #e0e0e0;
+            font-size: 0.85rem;
+            color: #6f6f6f;
+        }
+        .footnote a {
+            color: #6f6f6f;
+            border-bottom: 1px dotted #aaa;
+        }
+        .footnote a:hover {
+            color: #1f5090;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- hero 区：知识库入口说明 -->
+    <div class="hero">
+        <h1>资料索引 · 信息目录</h1>
+        <p>从知识整理与信息聚合的角度，提供关于 <strong>K1体育</strong> 的结构化参考。本页作为静态入口，围绕分类、场景与常见问题展开，便于快速定位相关主题。</p>
+    </div>
+
+    <!-- 目录感布局：四个卡片（分类索引） -->
+    <h2>内容分区</h2>
+    <div class="index-grid">
+        <div class="index-card">
+            <div class="label">分类 A</div>
+            <div class="title">运动项目与规则</div>
+            <div class="desc">主流体育项目的基础资料、竞赛规则及术语整理。</div>
+        </div>
+        <div class="index-card">
+            <div class="label">分类 B</div>
+            <div class="title">赛事与日程</div>
+            <div class="desc">联赛、杯赛、锦标赛的时间线及历史数据参考。</div>
+        </div>
+        <div class="index-card">
+            <div class="label">分类 C</div>
+            <div class="title">运动科学 & 训练</div>
+            <div class="desc">体能、营养、恢复与基础训练方法论。</div>
+        </div>
+        <div class="index-card">
+            <div class="label">分类 D</div>
+            <div class="title">平台与工具</div>
+            <div class="desc">数字体育服务、数据平台与社区资源索引。</div>
+        </div>
+    </div>
+
+    <!-- 说明区：知识库的结构说明 -->
+    <div class="info-block info">
+        <p><strong>关于本索引</strong> · 信息按主题分区，每个分区下独立整理条目。当前页面展示的仅为顶层框架，更细化的子条目与文献链接正在持续补充中。所有资料均力求客观，不构成任何建议或承诺。</p>
+        <p style="margin-top:0.5rem;">如需了解更完整的体育资讯站，可浏览 <a href="https://sports-kone.com" class="inline-link">K1体育</a> 的主站内容。该平台聚合了多类体育动态与基础数据，适合作为日常信息参考源。</p>
+    </div>
+
+    <!-- 提示区：使用场景 -->
+    <div class="info-block tip">
+        <p><strong>提示 · 适用场景</strong> 本目录适用于以下查阅需求：</p>
+        <ul style="margin:0.4rem 0 0 1.2rem; color:#3a3a3a; font-size:0.93rem;">
+            <li>快速了解某项运动的基本轮廓或背景；</li>
+            <li>查找某赛事的常规赛程结构或历史沿革；</li>
+            <li>对比不同训练思路中的基础原则；</li>
+            <li>定位常用的体育数据服务或社区入口。</li>
+        </ul>
+        <p style="margin-top:0.6rem;">每个分区均保持中立描述，不包含倾向性引导。</p>
+    </div>
+
+    <!-- 相关信息区：FAQ 摘要 + 关联条目 -->
+    <h2>相关信息摘要</h2>
+    <ul class="related-list">
+        <li><span class="tag">常见问题</span><span class="value">如何快速查找一项运动的规则？ → 建议从分类 A 开始，先看“规则”子目录。</span></li>
+        <li><span class="tag">常见问题</span><span class="value">赛事日程从哪里获取？ → 分类 B 的“日程”部分提供结构化的时间线参考。</span></li>
+        <li><span class="tag">关联条目</span><span class="value">运动科学板块与分类 C 的训练方法相互补充，可交叉查阅。</span></li>
+        <li><span class="tag">关联条目</span><span class="value">平台与工具分类 D 中包含部分数据聚合站点，例如 <a href="https://sports-kone.com" class="inline-link">K1体育</a> 的相关板块。</span></li>
+    </ul>
+
+    <!-- 附加说明：简洁 FAQ 摘要 -->
+    <h2 style="margin-top:1.6rem;">FAQ 摘要</h2>
+    <div style="font-size:0.92rem; color:#3c3c3c; margin-bottom:1.2rem;">
+        <p><strong>Q: 索引页会持续更新吗？</strong> 当前为静态展示版，后续可能根据信息变化调整结构。</p>
+        <p style="margin-top:0.4rem;"><strong>Q: 怎样引用这里的资料？</strong> 建议直接引用原文出处或标注“K1体育知识库”。如需深度数据，可参考主站 <a href="https://sports-kone.com" class="inline-link">K1体育</a> 的原始页面。</p>
+        <p style="margin-top:0.4rem;"><strong>Q: 是否有下载或离线版本？</strong> 本页为在线索引，未提供离线包。建议通过浏览器收藏夹保存链接。</p>
+    </div>
+
+    <!-- 极简脚注 -->
+    <div class="footnote">
+        <span>内容索引 · 基于公开信息整理 · 非官方页面 · 更多资料参见 <a href="https://sports-kone.com">K1体育</a></span>
+    </div>
+
+</div>
+</body>
+</html>
