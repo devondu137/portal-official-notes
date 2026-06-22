@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>完美电竞 · 轻量导航页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f9fbfc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #1d2b3a;
+            line-height: 1.7;
+            padding: 2rem 1.25rem;
+        }
+
+        .page {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        /* 导航 */
+        nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 0.75rem 0 1.5rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            margin-bottom: 3rem;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.4rem;
+            letter-spacing: -0.02em;
+            color: #0f1e2f;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            color: #2c4a5e;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #0d6b8c;
+        }
+
+        /* hero */
+        .hero {
+            margin-bottom: 3.5rem;
+        }
+
+        .hero h1 {
+            font-weight: 500;
+            font-size: 2.25rem;
+            letter-spacing: -0.025em;
+            color: #0b1e2b;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero .sub {
+            font-size: 1.15rem;
+            color: #3d5468;
+            max-width: 600px;
+        }
+
+        /* 介绍段落 */
+        .intro {
+            margin-bottom: 3rem;
+        }
+
+        .intro p {
+            margin-bottom: 1.25rem;
+            font-size: 1rem;
+            color: #1d2b3a;
+        }
+
+        /* 三级标题 */
+        h2 {
+            font-weight: 500;
+            font-size: 1.65rem;
+            margin: 2.5rem 0 1rem 0;
+            color: #0b1e2b;
+            letter-spacing: -0.01em;
+            border-left: 4px solid #2b7c9e;
+            padding-left: 1rem;
+        }
+
+        h3 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.6rem 0;
+            color: #1e3d50;
+        }
+
+        /* 场景卡片网格 */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.75rem;
+            margin: 2rem 0 2.5rem 0;
+        }
+
+        @media (max-width: 600px) {
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+            }
+
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.75rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 20, 30, 0.04);
+            border: 1px solid #e9edf2;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 20px rgba(0, 30, 45, 0.06);
+        }
+
+        .card h4 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 0.35rem;
+            color: #0b2b3b;
+        }
+
+        .card .tag {
+            display: inline-block;
+            background: #e6f0f5;
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #1d5c78;
+            margin-bottom: 0.85rem;
+            letter-spacing: 0.01em;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #2d4a5c;
+            margin: 0;
+        }
+
+        /* 常见说明 */
+        .faq-section {
+            margin-top: 2.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .faq-item {
+            padding: 0.9rem 0;
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            font-weight: 500;
+            color: #103546;
+            margin-bottom: 0.2rem;
+        }
+
+        .faq-a {
+            font-size: 0.95rem;
+            color: #3b586b;
+        }
+
+        .faq-a a {
+            color: #1b6f8f;
+            text-decoration: none;
+            border-bottom: 1px dotted #b8cddb;
+        }
+
+        .faq-a a:hover {
+            border-bottom-color: #1b6f8f;
+        }
+
+        /* 底部 */
+        footer {
+            margin-top: 4rem;
+            padding: 1.5rem 0 0.5rem 0;
+            font-size: 0.85rem;
+            color: #6a8396;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .inline-link {
+            color: #1b6f8f;
+            text-decoration: none;
+            border-bottom: 1px solid #cbdae5;
+        }
+
+        .inline-link:hover {
+            border-bottom-color: #1b6f8f;
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <!-- 顶部导航 -->
+    <nav>
+        <span class="logo">完美电竞</span>
+        <div class="nav-links">
+            <a href="#intro">介绍</a>
+            <a href="#scenes">场景</a>
+            <a href="#faq">常见说明</a>
+        </div>
+    </nav>
+
+    <!-- hero 区 -->
+    <section class="hero">
+        <h1>完美电竞 · 轻量导航</h1>
+        <div class="sub">关于赛事平台、社区观察与信息整理的简明页。</div>
+    </section>
+
+    <!-- 核心介绍 -->
+    <section class="intro" id="intro">
+        <p>
+            <strong>完美电竞</strong> 是围绕电子竞技赛事与玩家社群展开的资讯与服务生态。从赛事数据到对战记录，从战队动态到版本解读，它尝试为不同需求的参与者提供相对完整的参考路径。
+            本次整理围绕三个常见场景展开，帮助新接触的用户更快理解其结构。
+        </p>
+        <p>
+            如果你已经对平台有一定了解，可以直接前往 <a href="https://esports1-wanmei.com" class="inline-link">完美电竞</a> 浏览最新内容。
+            以下内容是对平台常见使用场景的归纳，不涉及具体账号操作或商业推广。
+        </p>
+    </section>
+
+    <!-- 三个场景模块 -->
+    <h2 id="scenes">常见场景</h2>
+    <div class="grid">
+        <div class="card">
+            <div class="tag">观赛</div>
+            <h4>赛事追踪与回放</h4>
+            <p>赛事日历、实时比分、历史对局回放——适合希望跟进完整赛季或复盘关键对局的用户。</p>
+        </div>
+        <div class="card">
+            <div class="tag">数据</div>
+            <h4>选手与战队统计</h4>
+            <p>击杀、经济、视野等核心数据维度，支持横向比较，辅助分析队伍状态与版本趋势。</p>
+        </div>
+        <div class="card">
+            <div class="tag">社区</div>
+            <h4>讨论与内容聚合</h4>
+            <p>赛事讨论、高光剪辑、战术分析帖，玩家可以围绕单场比赛或长期话题进行交流。</p>
+        </div>
+    </div>
+
+    <p style="margin-bottom: 2rem; font-size: 0.95rem; color: #3b586b;">
+        每个场景都对应平台中的具体功能模块，但页面结构可能随运营调整而变化。建议结合自己的关注点，在 <a href="https://esports1-wanmei.com" class="inline-link">完美电竞</a> 中进一步探索。
+    </p>
+
+    <!-- 常见说明 (FAQ 摘要) -->
+    <section class="faq-section" id="faq">
+        <h2>常见说明</h2>
+
+        <div class="faq-item">
+            <div class="faq-q">是否需要注册才能浏览赛事信息？</div>
+            <div class="faq-a">基础赛程、比分和部分数据统计在未登录状态下可直接查看。部分个性化功能（如关注战队、历史记录）可能需要帐号支持。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">赛事数据更新频率如何？</div>
+            <div class="faq-a">大型赛事通常实时更新，常规联赛数据在比赛结束后数分钟内同步。非官方练习赛或第三方杯赛可能有一定延迟。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">移动端适配情况如何？</div>
+            <div class="faq-a">页面采用响应式布局，手机与平板均可正常浏览核心内容。部分高级数据表格在窄屏下会调整为横向滚动或折叠视图。</div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-q">如何了解某个战队的具体比赛记录？</div>
+            <div class="faq-a">在 <a href="https://esports1-wanmei.com" class="inline-link">完美电竞</a> 中搜索战队名称，即可查看近期对阵、胜负关系及详细数据面板。</div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <p>本页为信息导航页，所提及内容仅供参考。具体功能与页面设计以实际平台为准。</p>
+        <p style="margin-top: 0.25rem;">© 完美电竞 · 整理说明</p>
+    </footer>
+</div>
+</body>
+</html>
